@@ -25,7 +25,7 @@
           <a href="#" class="logo mr-auto"> <i class="fas fa-mug-hot"></i> DThanh </a>
           <a href="{{ route('foods.index') }}" class="logo mr-auto"> Quay lại </a>
           <h3>Thêm sản phẩm nào!!!</h3>
-          <img style="height: 30px;width:30px;" src="/assets/images/{{isset($food)?$cfood->image:''}}"class="box" id="newimage">
+          <img style="height: 50px;width:50px;" src="/assets/images/{{isset($food)?$cfood->image:''}}"class="box" id="newimage">
           <input type="file" class="form-control" id="image" name="image" onchange="changeImage(event)">
           <label for="">Manufacturer</label>
             <select class="form-select select-mt3" name="cate_id">
@@ -47,8 +47,10 @@
           <label remember-me">Lưu tài khoản?</label>
           <a href="#">Quên mật khẩu?</a>for=" --}}
        </div>
-       <input type="submit" value="Thêm" class="link-btn">
+       <input type="submit" onclick="return confirm('Are you sure?')" value="Thêm" class="link-btn">
     </form>
  </div>
+ <script src="/assets/js/getDB.js"></script>
+ <script src="/assets/js/getImage.js"></script>
 </body>
 </html>
