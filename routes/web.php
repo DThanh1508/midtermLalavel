@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('foods',[FoodController::class,'index'])->name('foods.index');
-Route::get('foods/create',[FoodController::class,'create'])->name('foods.create');
-Route::post('foods/',[FoodController::class,'store'])->name('foods.store');
-Route::get('foods/{food}',[FoodController::class,'show'])->name('foods.show');
+Route::get('/foods',[FoodController::class,'index'])->name('foods.index');
+Route::get('/foods/create',[FoodController::class,'create'])->name('foods.create');
+Route::post('/foods/',[FoodController::class,'store'])->name('foods.store');
+Route::get('/foods/{food}',[FoodController::class,'show'])->name('foods.show');

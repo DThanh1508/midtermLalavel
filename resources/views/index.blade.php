@@ -34,7 +34,7 @@
     <script src="./js/jquery.min.js"></script>
 </head>
 
-<body class="switcher-visible">
+<body class="">
     <div id="overlay">
         <div id="overlay-top"></div>
         <div id="overlay-bottom">

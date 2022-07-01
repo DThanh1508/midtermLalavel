@@ -18,12 +18,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-        //
-        // $cars =Car::all();
-        // return view('showAll',['cars'=>$cars]);
-        // $foods =Food::all();
-        // return view('getDB',['foods'=>$foods]);
-        return view('getDB');
+        $foods =Food::all();
+        return view('index',['foods'=>$foods]);
     }
 
     /**
@@ -61,13 +57,13 @@ class FoodController extends Controller
             $file->move($destinationPath,$name);
         }
         $this -> validate($req,[
-            'category_id'=>'required',
+            'cate_id'=>'required',
             'fruitName'=>'required',
             'oldPrice'=>'required',
             'newPrice'=>'required',
             'produced_on'=>'required|date'
         ],[
-            'category_id.required'=> 'Bạn chưa nhập loại trái cây',
+            'cate_id.required'=> 'Bạn chưa nhập loại trái cây',
             'fruitName.required'=>'Bạn chưa nhập tên trái cây',
             'oldPrice.required'=>'Bạn chưa nhập giá',
             'newPrice.required'=>'Bạn chưa nhập giá',
@@ -75,13 +71,14 @@ class FoodController extends Controller
             'produced_on.date'=> 'Cột produced_on phải là kiểu ngày!'
         ]);
 
-        $car=new Car();
-        $car -> category_id = $req->category_id;
-        $car -> make = $req->make;
-        $car -> model =$req->model;
-        $car->produced_on=$req->produced_on;
-        $car->image=$name;
-        $car->save();
+        $food=new Food();
+        $food -> cate_id = $req->cate_id;
+        $food -> fruitName = $req->fruitName;
+        $food -> oldPrice =$req->oldPrice;
+        $food -> newPrice =$req->newPrice;
+        $food->produced_on=$req->produced_on;
+        $food->image=$name;
+        $food->save();
         return redirect()->route('foods.index')->with('success','Bạn đã cập nhật nhật thành công');
     }
 
@@ -94,8 +91,8 @@ class FoodController extends Controller
     public function show($id)
     {
         //
-        $car =Food::find($id);
-        return view('show',compact('food'));
+        $food =Food::find($id);
+        return view('show',compact('foods'));
     }
 
     /**

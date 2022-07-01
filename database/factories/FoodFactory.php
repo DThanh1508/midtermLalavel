@@ -22,6 +22,8 @@ class FoodFactory extends Factory
             'oldPrice' => $this->faker->name(),
             'newPrice' => $this->faker->name(),
             'produced_on' => now(),
+            "cate_id" =>rand(1, 4),
+            "image" => ""
         ];
     }
 }

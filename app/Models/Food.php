@@ -9,10 +9,11 @@ use App\Models\Category;
 class Food extends Model
 {
     use HasFactory;
+    protected $table = "foods";
 
     public function category()
     {
         # code...
-        return $this->belongsTo(Category::class,'category_id','id');
+        return $this->belongsTo(Category::class,'cate_id','id');
     }
 }
