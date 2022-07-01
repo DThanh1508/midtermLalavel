@@ -9,11 +9,13 @@ use App\Models\Food;
 class Category extends Model
 {
     use HasFactory;
+    public $table = "category";
 
-    public function foods()
+    public function food()
     {
         # code...
-        return $this->hasMany(Food::class);
+        return $this->hasMany(Food::class,'cate_id');
+
     }
     
 }

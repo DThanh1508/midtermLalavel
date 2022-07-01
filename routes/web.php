@@ -20,4 +20,4 @@ Route::get('/', function () {
 Route::get('/foods',[FoodController::class,'index'])->name('foods.index');
 Route::get('/foods/create',[FoodController::class,'create'])->name('foods.create');
 Route::post('/foods/',[FoodController::class,'store'])->name('foods.store');
-Route::get('/foods/{food}',[FoodController::class,'show'])->name('foods.show');
+Route::get('/foods/{food}',[FoodController::class,'show'])->name('foods.detail');

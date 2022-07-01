@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 // import Storage class
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +19,11 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods =Food::all();
-        return view('index',['foods'=>$foods]);
+        $food1 = Category::find(1)->food()->get();
+        $food2 =Category::find(2)->food()->get();
+        $food3 =Category::find(3)->food()->get();
+        $food4 =Category::find(4)->food()->get();
+        return view('index',compact('food1','food2','food3','food4'));
     }
 
     /**
@@ -30,7 +34,7 @@ class FoodController extends Controller
     public function create()
     {
         //
-        return view('addDB');
+        return view('addFood');
     }
 
     /**
@@ -42,6 +46,23 @@ class FoodController extends Controller
     public function store(Request $req)
     {
         //
+    
+        $this -> validate($req,[
+            'image'=>'required',
+            'cate_id'=>'required',
+            'fruitName'=>'required',
+            'oldPrice'=>'required',
+            'newPrice'=>'required',
+            'produced_on'=>'required|date'
+        ],[
+            'image.required'=> 'Bạn chưa chọn ảnh',
+            'cate_id.required'=> 'Bạn chưa nhập loại trái cây',
+            'fruitName.required'=>'Bạn chưa nhập tên trái cây',
+            'oldPrice.required'=>'Bạn chưa nhập giá',
+            'newPrice.required'=>'Bạn chưa nhập giá',
+            'produced_on.required'=> 'Bạn chưa nhập ngày sản xuất',
+            'produced_on.date'=> 'Cột produced_on phải là kiểu ngày!'
+        ]);
         $name="";
         if ($req->hasfile('image')) {
             # code...
@@ -56,20 +77,6 @@ class FoodController extends Controller
             $destinationPath=public_path('/assets/images');
             $file->move($destinationPath,$name);
         }
-        $this -> validate($req,[
-            'cate_id'=>'required',
-            'fruitName'=>'required',
-            'oldPrice'=>'required',
-            'newPrice'=>'required',
-            'produced_on'=>'required|date'
-        ],[
-            'cate_id.required'=> 'Bạn chưa nhập loại trái cây',
-            'fruitName.required'=>'Bạn chưa nhập tên trái cây',
-            'oldPrice.required'=>'Bạn chưa nhập giá',
-            'newPrice.required'=>'Bạn chưa nhập giá',
-            'produced_on.required'=> 'Bạn chưa nhập ngày sản xuất',
-            'produced_on.date'=> 'Cột produced_on phải là kiểu ngày!'
-        ]);
 
         $food=new Food();
         $food -> cate_id = $req->cate_id;
@@ -92,7 +99,7 @@ class FoodController extends Controller
     {
         //
         $food =Food::find($id);
-        return view('show',compact('foods'));
+        return view('detail',compact('food'));
     }
 
     /**
